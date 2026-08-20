@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masa Sistemi - Növbə</title>
+    <link rel="icon" type="image/png" href="/logondu.png">
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:Arial,sans-serif;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);min-height:100vh;padding:20px}
+        .container{max-width:800px;margin:0 auto;background:white;border-radius:20px;padding:30px;box-shadow:0 15px 40px rgba(0,0,0,.2)}
+        .header{text-align:center;margin-bottom:30px;color:#333}
+        .desk-number{font-size:72px;font-weight:bold;color:#667eea;margin-bottom:10px}
+        .desk-title{font-size:24px;color:#555}
+        .current-customer{background:linear-gradient(135deg,#28a745,#20c997);color:white;padding:30px;border-radius:15px;margin-bottom:20px;text-align:center;box-shadow:0 8px 25px rgba(40,167,69,.3)}
+        .current-customer.empty{background:linear-gradient(135deg,#6c757d,#495057)}
+        .customer-number{font-size:48px;font-weight:bold;margin-bottom:10px}
+        .customer-name{font-size:28px;margin-bottom:5px}
+        .customer-service{font-size:18px;opacity:.9}
+        .customer-time{font-size:16px;opacity:.8;margin-top:10px}
+        .action-buttons{display:flex;gap:15px;margin-bottom:30px;justify-content:center}
+        .btn{padding:15px 30px;border:none;border-radius:10px;cursor:pointer;font-size:18px;font-weight:bold;transition:all .3s;min-width:150px}
+        .btn-next{background:linear-gradient(135deg,#28a745,#20c997);color:white}
+        .btn-recall{background:linear-gradient(135deg,#ffc107,#ffb300);color:#212529}
+        .btn-complete{background:linear-gradient(135deg,#dc3545,#c82333);color:white}
+        .btn:disabled{opacity:.5;cursor:not-allowed;transform:none}
+        .waiting-queue{background:#f8f9fa;border-radius:15px;padding:20px;border:2px solid #e9ecef}
+        .queue-title{font-size:20px;margin-bottom:15px;color:#495057;text-align:center}
+        .queue-list{max-height:300px;overflow-y:auto}
+        .queue-item{display:flex;justify-content:space-between;align-items:center;padding:12px 15px;background:white;border-radius:8px;margin-bottom:8px;box-shadow:0 2px 5px rgba(0,0,0,.1);cursor:pointer;transition:all .3s}
+        .queue-item:hover{transform:translateX(5px);box-shadow:0 4px 10px rgba(0,0,0,.15)}
+        .queue-item.selected{background:#e6f3ff;border:2px solid #007bff}
+        .queue-info{flex:1}
+        .queue-number{font-size:24px;font-weight:bold;color:#667eea;margin-bottom:2px}
+        .queue-name{font-size:16px;color:#333;margin-bottom:2px}
+        .queue-service{font-size:14px;color:#6c757d}
+        .call-btn{padding:8px 16px;background:#007bff;color:white;border:none;border-radius:5px;cursor:pointer;font-size:14px}
+        .call-btn:hover{background:#0056b3}
+        .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-top:20px}
+        .stat-card{background:linear-gradient(135deg,#667eea,#764ba2);color:white;padding:15px;border-radius:10px;text-align:center}
+        .stat-number{font-size:28px;font-weight:bold;margin-bottom:5px}
+        .stat-label{font-size:14px;opacity:.9}
+        .notification{position:fixed;top:20px;right:20px;padding:15px 20px;border-radius:8px;color:white;z-index:1000;animation:slideIn .3s ease}
+        .notification.success{background:#28a745}
+        .notification.error{background:#dc3545}
+        @keyframes slideIn{from{transform:translateX(100%)}to{transform:translateX(0)}}
+        .empty-state{text-align:center;padding:40px;color:#6c757d}
+        .empty-state .icon{font-size:48px;margin-bottom:15px}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="desk-number" id="deskNumber">?</div>
+            <div class="desk-title">Nömrəli Masa</div>
+        </div>
+
+        <div class="current-customer empty" id="currentCustomer">
+            <div class="customer-number" id="customerNumber">Növbədə heçkim yoxdur</div>
+            <div class="customer-name" id="customerName">Növbə gözlənilir</div>
+            <div class="customer-service" id="customerService"></div>
+            <div class="customer-time" id="customerTime"></div>
+        </div>
+
+        <div class="action-buttons">
+            <button class="btn btn-next" id="nextBtn" onclick="callNext()" disabled>📞 Növbəti</button>
+            <button class="btn btn-recall" id="recallBtn" onclick="recallCurrent()" disabled>🔊 Təkrar çağır</button>
+            <button class="btn btn-complete" id="completeBtn" onclick="completeService()" disabled>✅ Tamamla</button>
+        </div>
+
+        <div class="waiting-queue">
+            <div class="queue-title">📋 Gözləyən Vətəndaşlar</div>
+            <div class="queue-list" id="queueList">
+                <div class="empty-state">
+                    <div class="icon">⏳</div>
+                    <div>Hazırda gözləyən vətəndaş yoxdur</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="stats">
+            <div class="stat-card"><div class="stat-number" id="totalWaiting">0</div><div class="stat-label">Gözləyir</div></div>
+            <div class="stat-card"><div class="stat-number" id="totalServed">0</div><div class="stat-label">Xidmət verildi</div></div>
+            <div class="stat-card"><div class="stat-number" id="averageTime">0</div><div class="stat-label">Orta vaxt (dəq)</div></div>
+        </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+        let currentDesk = null;
+        let allData = null;
+
+        currentDesk = window.location.pathname.split('/').pop();
+        document.getElementById('deskNumber').textContent = currentDesk;
+        document.title = `${currentDesk} Nömrəli Masa - Növbə Sistemi`;
+
+        async function callNext() {
+            const waiting = allData.queue.filter(item => item.status === 'waiting');
+            if (waiting.length === 0) {
+                showNotification('Gözləyən vətəndaş yoxdur', 'error');
+                return;
+            }
+            await callCustomer(waiting[0].id);
+        }
+
+        async function callCustomer(queueId) {
+            try {
+                await fetch('/api/queue/call', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ queueId, deskNumber: currentDesk })
+                });
+            } catch (error) {
+                showNotification('Xəta baş verdi', 'error');
+            }
+        }
+
+        async function recallCurrent() {
+            if (!allData.desks[currentDesk]) {
+                showNotification('Cari müştəri yoxdur', 'error');
+                return;
+            }
+            try {
+                await fetch('/api/queue/recall', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ queueId: allData.desks[currentDesk].id })
+                });
+            } catch (error) {
+                showNotification('Xəta baş verdi', 'error');
+            }
+        }
+
+        async function completeService() {
+            const customer = allData.desks[currentDesk];
+            if (!customer) {
+                showNotification('Cari müştəri yoxdur', 'error');
+                return;
+            }
+            try {
+                await fetch('/api/queue/complete', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ queueId: customer.id })
+                });
+            } catch (error) {
+                showNotification('Xəta baş verdi', 'error');
+            }
+        }
+
+        function showNotification(message, type = 'success') {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            setTimeout(() => notification.remove(), 3000);
+        }
+
+        function updateDisplay(data) {
+            allData = data;
+            const customer = data.desks[currentDesk] || null;
+
+            const customerDiv = document.getElementById('currentCustomer');
+            const numberEl = document.getElementById('customerNumber');
+            const nameEl = document.getElementById('customerName');
+            const serviceEl = document.getElementById('customerService');
+            const timeEl = document.getElementById('customerTime');
+
+            if (customer) {
+                customerDiv.classList.remove('empty');
+                numberEl.textContent = `#${customer.number}`;
+                nameEl.textContent = customer.name;
+                serviceEl.textContent = customer.serviceType;
+                if (customer.calledTime) {
+                    const callTime = new Date(customer.calledTime);
+                    timeEl.textContent = `Çağırıldı: ${callTime.toLocaleTimeString('az-AZ')}`;
+                }
+            } else {
+                customerDiv.classList.add('empty');
+                numberEl.textContent = 'Növbədə heçkim yoxdur';
+                nameEl.textContent = 'Növbə gözlənilir';
+                serviceEl.textContent = '';
+                timeEl.textContent = '';
+            }
+
+            const nextBtn = document.getElementById('nextBtn');
+            const recallBtn = document.getElementById('recallBtn');
+            const completeBtn = document.getElementById('completeBtn');
+
+            const hasWaiting = data.queue.filter(item => item.status === 'waiting').length > 0;
+
+            nextBtn.disabled = !hasWaiting || !!customer;
+            recallBtn.disabled = !customer;
+            completeBtn.disabled = !customer;
+
+            const waitingCustomers = data.queue.filter(item => item.status === 'waiting');
+            const queueList = document.getElementById('queueList');
+            if (waitingCustomers.length === 0) {
+                queueList.innerHTML = `
+                    <div class="empty-state">
+                        <div class="icon">⏳</div>
+                        <div>Hazırda gözləyən vətəndaş yoxdur</div>
+                    </div>
+                `;
+            } else {
+                queueList.innerHTML = '';
+                waitingCustomers.forEach(customer => {
+                    const div = document.createElement('div');
+                    div.className = 'queue-item';
+                    div.innerHTML = `
+                        <div class="queue-info">
+                            <div class="queue-number">#${customer.number}</div>
+                            <div class="queue-name">${customer.name}</div>
+                            <div class="queue-service">${customer.serviceType}</div>
+                        </div>
+                        <button class="call-btn" onclick="callCustomer(${customer.id})">
+                            📞 Çağır
+                        </button>
+                    `;
+                    queueList.appendChild(div);
+                });
+            }
+
+            document.getElementById('totalWaiting').textContent = waitingCustomers.length;
+            document.getElementById('totalServed').textContent = data.stats.totalServed;
+            document.getElementById('averageTime').textContent = data.stats.averageTime;
+        }
+
+        socket.on('queueUpdated', updateDisplay);
+        socket.on('customerCalled', data => {
+            if (data.deskNumber == currentDesk) {
+                showNotification(`${data.customerName} çağırıldı`, 'success');
+            }
+        });
+
+        fetch('/api/state').then(r => r.json()).then(updateDisplay);
+    </script>
+</body>
+</html>

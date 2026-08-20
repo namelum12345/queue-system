@@ -1,0 +1,33 @@
+name: Deploy to Server
+
+on:
+  push:
+    branches:
+      - main
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: SSH Deploy
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          port: ${{ secrets.SERVER_PORT }}
+          envs: DEPLOY_BRANCH
+          script_stop: true
+          script: |
+            cd ${{ secrets.APP_PATH }}
+            git fetch origin "$DEPLOY_BRANCH"
+            git reset --hard "origin/$DEPLOY_BRANCH"
+            npm ci --omit=dev
+            pm2 restart queue-system --update-env || pm2 start server.js --name queue-system
+            pm2 save
+        env:
+          DEPLOY_BRANCH: ${{ github.ref_name }}

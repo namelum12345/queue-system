@@ -4,6 +4,7 @@ const socketIo = require('socket.io');
 const path = require('path');
 const fs = require('fs');
 const crypto = require('crypto');
+require('dotenv').config();
 
 const app = express();
 const server = http.createServer(app);
@@ -19,7 +20,8 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // Şifrə
-const ADMIN_PASS = '@ndu19672025';
+const ADMIN_PASS = process.env.ADMIN_PASS;
+if (!ADMIN_PASS) throw new Error('ADMIN_PASS environment variable is required');
 
 // Aktiv admin tokenləri: token -> {createdAt}
 const adminTokens = new Map();

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Monitor Ekranı - Naxçıvan Dövlət Universiteti Növbə Sistemi</title>
+    <title>Monitor Ekranı - Naxçıvan | Dövlət Universiteti | Növbə Sistemi</title>
     <!-- Favicon / Icon -->
     <link rel="icon" type="image/png" href="/logondu.png">
     <link rel="shortcut icon" type="image/png" href="/logondu.png">
@@ -13,21 +13,21 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --ndu-navy-dark: #051329;
-            --ndu-navy-main: #0a1f40;
-            --ndu-navy-light: #132f5d;
+            --ndu-navy-dark: #1e3a5f;
+            --ndu-navy-main: #1a3356;
+            --ndu-navy-light: #2563eb;
             --ndu-blue-accent: #2563eb;
-            --ndu-blue-glow: #3b82f6;
-            --ndu-gold: #f59e0b;
-            --ndu-gold-light: #fbbf24;
-            --ndu-gold-glow: rgba(245, 158, 11, 0.4);
-            --ndu-emerald: #10b981;
-            --ndu-emerald-glow: rgba(16, 185, 129, 0.4);
-            --ndu-text-light: #f8fafc;
-            --ndu-text-muted: #94a3b8;
-            --glass-bg: rgba(19, 47, 93, 0.45);
-            --glass-border: rgba(255, 255, 255, 0.12);
-            --glass-gold-border: rgba(245, 158, 11, 0.35);
+            --ndu-blue-glow: #1d4ed8;
+            --ndu-gold: #d97706;
+            --ndu-gold-light: #b45309;
+            --ndu-gold-glow: rgba(180, 83, 9, 0.3);
+            --ndu-emerald: #059669;
+            --ndu-emerald-glow: rgba(5, 150, 105, 0.3);
+            --ndu-text-light: #111827;
+            --ndu-text-muted: #4b5563;
+            --glass-bg: rgba(241, 245, 249, 0.85);
+            --glass-border: rgba(0, 0, 0, 0.1);
+            --glass-gold-border: rgba(180, 83, 9, 0.3);
         }
 
         * {
@@ -38,14 +38,14 @@
 
         body {
             font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: radial-gradient(circle at 50% 0%, #0f2b57 0%, #06142a 60%, #030a16 100%);
+            background: #ffffff;
             color: var(--ndu-text-light);
             min-height: 100vh;
             overflow: hidden;
             position: relative;
         }
 
-        /* Ambient background glow effects */
+        /* Ambient background effects */
         body::before {
             content: '';
             position: absolute;
@@ -53,7 +53,7 @@
             left: 20%;
             width: 600px;
             height: 600px;
-            background: radial-gradient(circle, rgba(37, 99, 235, 0.18) 0%, rgba(0, 0, 0, 0) 70%);
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.06) 0%, rgba(255, 255, 255, 0) 70%);
             pointer-events: none;
             z-index: 0;
         }
@@ -65,7 +65,7 @@
             right: 15%;
             width: 500px;
             height: 500px;
-            background: radial-gradient(circle, rgba(245, 158, 11, 0.12) 0%, rgba(0, 0, 0, 0) 70%);
+            background: radial-gradient(circle, rgba(180, 83, 9, 0.05) 0%, rgba(255, 255, 255, 0) 70%);
             pointer-events: none;
             z-index: 0;
         }
@@ -91,7 +91,7 @@
             padding: 16px 28px;
             border-radius: 24px;
             border: 1px solid var(--glass-border);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
         }
 
         .brand-section {
@@ -132,16 +132,14 @@
             font-size: 24px;
             font-weight: 800;
             letter-spacing: -0.5px;
-            background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: #111827;
             text-transform: uppercase;
         }
 
         .sub-header-title {
             font-size: 15px;
             font-weight: 600;
-            color: var(--ndu-gold-light);
+            color: #374151;
             display: flex;
             align-items: center;
             gap: 8px;
@@ -152,9 +150,9 @@
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            background: rgba(16, 185, 129, 0.15);
-            border: 1px solid rgba(16, 185, 129, 0.3);
-            color: #34d399;
+            background: rgba(5, 150, 105, 0.1);
+            border: 1px solid rgba(5, 150, 105, 0.3);
+            color: #065f46;
             padding: 4px 10px;
             border-radius: 20px;
             font-size: 12px;
@@ -166,7 +164,7 @@
         .live-dot {
             width: 8px;
             height: 8px;
-            background-color: #34d399;
+            background-color: #059669;
             border-radius: 50%;
             animation: blink 1.5s ease-in-out infinite;
         }
@@ -180,9 +178,9 @@
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            background: rgba(37, 99, 235, 0.2);
-            border: 1px solid rgba(37, 99, 235, 0.4);
-            color: #93c5fd;
+            background: rgba(37, 99, 235, 0.1);
+            border: 1px solid rgba(37, 99, 235, 0.35);
+            color: #1d4ed8;
             padding: 4px 12px;
             border-radius: 20px;
             font-size: 12px;
@@ -193,25 +191,25 @@
         }
 
         .sound-badge:hover {
-            background: rgba(37, 99, 235, 0.4);
-            color: #ffffff;
-            border-color: #60a5fa;
+            background: rgba(37, 99, 235, 0.2);
+            color: #1e3a8a;
+            border-color: #2563eb;
         }
 
         .clock-container {
             display: flex;
             flex-direction: column;
             align-items: flex-end;
-            background: rgba(5, 19, 41, 0.6);
+            background: rgba(241, 245, 249, 0.9);
             padding: 10px 20px;
             border-radius: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(0, 0, 0, 0.1);
         }
 
         .clock-time {
             font-size: 26px;
             font-weight: 800;
-            color: #ffffff;
+            color: #111827;
             font-variant-numeric: tabular-nums;
             letter-spacing: 1px;
         }
@@ -219,7 +217,7 @@
         .clock-date {
             font-size: 13px;
             font-weight: 500;
-            color: var(--ndu-text-muted);
+            color: #4b5563;
             text-transform: capitalize;
         }
 
@@ -310,15 +308,15 @@
 
         /* Desks Section */
         .desks-section {
-            background: var(--glass-bg);
+            background: rgba(248, 250, 252, 0.95);
             backdrop-filter: blur(24px);
             -webkit-backdrop-filter: blur(24px);
             border-radius: 24px;
             padding: 24px;
-            border: 1px solid var(--glass-border);
+            border: 1px solid rgba(0, 0, 0, 0.08);
             display: flex;
             flex-direction: column;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.07);
         }
 
         .section-header {
@@ -327,21 +325,21 @@
             gap: 12px;
             margin-bottom: 20px;
             padding-bottom: 12px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
         }
 
         .section-icon {
             font-size: 22px;
-            background: rgba(37, 99, 235, 0.2);
+            background: rgba(37, 99, 235, 0.08);
             padding: 8px 12px;
             border-radius: 12px;
-            border: 1px solid rgba(37, 99, 235, 0.3);
+            border: 1px solid rgba(37, 99, 235, 0.2);
         }
 
         .desks-title {
             font-size: 20px;
             font-weight: 700;
-            color: #ffffff;
+            color: #111827;
         }
 
         .desks-grid {
@@ -354,8 +352,8 @@
 
         /* Individual Desk Card */
         .desk {
-            background: rgba(8, 25, 53, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(0, 0, 0, 0.1);
             border-radius: 20px;
             padding: 20px 14px;
             display: flex;
@@ -366,6 +364,7 @@
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
         }
 
         .desk::before {
@@ -375,32 +374,32 @@
             left: 0;
             right: 0;
             height: 4px;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.08);
             transition: background 0.3s ease;
         }
 
         .desk-number-container {
             width: 56px;
             height: 56px;
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(37, 99, 235, 0.08);
             border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(37, 99, 235, 0.2);
             margin-bottom: 12px;
         }
 
         .desk-number {
             font-size: 28px;
             font-weight: 800;
-            color: var(--ndu-text-light);
+            color: #1e3a5f;
         }
 
         .desk-label {
             font-size: 13px;
             font-weight: 600;
-            color: var(--ndu-text-muted);
+            color: #4b5563;
             text-transform: uppercase;
             letter-spacing: 0.5px;
             margin-bottom: 12px;
@@ -417,10 +416,10 @@
         .desk.occupied .desk-label {
             font-size: 24px;
             font-weight: 800;
-            color: #ffffff;
+            color: #111827;
             text-transform: none;
             letter-spacing: -0.3px;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+            text-shadow: none;
             margin-bottom: 14px;
         }
 
@@ -433,9 +432,9 @@
         }
 
         .empty-badge {
-            background: rgba(255, 255, 255, 0.06);
-            color: var(--ndu-text-muted);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.04);
+            color: #6b7280;
+            border: 1px solid rgba(0, 0, 0, 0.08);
             padding: 8px 16px;
             border-radius: 12px;
             font-size: 14px;
@@ -445,9 +444,9 @@
 
         /* Occupied Desk State */
         .desk.occupied {
-            background: linear-gradient(180deg, rgba(16, 185, 129, 0.18) 0%, rgba(5, 30, 20, 0.6) 100%);
+            background: linear-gradient(180deg, rgba(5, 150, 105, 0.08) 0%, rgba(5, 150, 105, 0.03) 100%);
             border: 1.5px solid var(--ndu-emerald);
-            box-shadow: 0 12px 30px rgba(16, 185, 129, 0.25);
+            box-shadow: 0 8px 24px rgba(5, 150, 105, 0.15);
             transform: translateY(-4px);
         }
 
@@ -457,8 +456,8 @@
 
         .desk.occupied .desk-number-container {
             background: var(--ndu-emerald);
-            border-color: #6ee7b7;
-            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+            border-color: #34d399;
+            box-shadow: 0 4px 12px rgba(5, 150, 105, 0.3);
         }
 
         .desk.occupied .desk-number {
@@ -479,7 +478,7 @@
         .active-name {
             font-size: 16px;
             font-weight: 700;
-            color: #ffffff;
+            color: #111827;
             word-break: break-word;
             line-height: 1.3;
             margin-top: 4px;
@@ -487,29 +486,29 @@
 
         .active-service {
             font-size: 12px;
-            color: #a7f3d0;
+            color: #065f46;
             font-weight: 500;
             opacity: 0.9;
         }
 
         /* Waiting Section */
         .waiting-section {
-            background: var(--glass-bg);
+            background: rgba(248, 250, 252, 0.95);
             backdrop-filter: blur(24px);
             -webkit-backdrop-filter: blur(24px);
             border-radius: 24px;
             padding: 24px;
-            border: 1px solid var(--glass-border);
+            border: 1px solid rgba(0, 0, 0, 0.08);
             display: flex;
             flex-direction: column;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.07);
             min-height: 0;
         }
 
         .waiting-title {
             font-size: 20px;
             font-weight: 700;
-            color: #ffffff;
+            color: #111827;
         }
 
         .waiting-list {
@@ -526,20 +525,20 @@
             width: 6px;
         }
         .waiting-list::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(0, 0, 0, 0.04);
             border-radius: 8px;
         }
         .waiting-list::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(0, 0, 0, 0.15);
             border-radius: 8px;
         }
         .waiting-list::-webkit-scrollbar-thumb:hover {
-            background: rgba(255, 255, 255, 0.35);
+            background: rgba(0, 0, 0, 0.25);
         }
 
         .waiting-item {
-            background: rgba(8, 25, 53, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(0, 0, 0, 0.07);
             border-left: 5px solid var(--ndu-blue-accent);
             padding: 14px 18px;
             border-radius: 16px;
@@ -547,18 +546,19 @@
             align-items: center;
             gap: 16px;
             transition: all 0.3s ease;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.05);
         }
 
         .waiting-item:hover {
-            background: rgba(19, 47, 93, 0.7);
+            background: rgba(239, 246, 255, 0.9);
             transform: translateX(4px);
-            border-color: rgba(255, 255, 255, 0.2);
+            border-color: rgba(37, 99, 235, 0.3);
         }
 
         .waiting-number {
             font-size: 24px;
             font-weight: 800;
-            color: var(--ndu-gold-light);
+            color: #b45309;
             min-width: 55px;
         }
 
@@ -570,7 +570,7 @@
         .waiting-name {
             font-size: 16px;
             font-weight: 700;
-            color: #ffffff;
+            color: #111827;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -578,7 +578,7 @@
 
         .waiting-service {
             font-size: 13px;
-            color: var(--ndu-text-muted);
+            color: #4b5563;
             margin-top: 2px;
             white-space: nowrap;
             overflow: hidden;
@@ -586,9 +586,9 @@
         }
 
         .waiting-tag {
-            background: rgba(37, 99, 235, 0.15);
-            color: #93c5fd;
-            border: 1px solid rgba(37, 99, 235, 0.3);
+            background: rgba(37, 99, 235, 0.08);
+            color: #1d4ed8;
+            border: 1px solid rgba(37, 99, 235, 0.2);
             font-size: 12px;
             font-weight: 600;
             padding: 4px 10px;
@@ -602,7 +602,7 @@
             align-items: center;
             justify-content: center;
             height: 100%;
-            color: var(--ndu-text-muted);
+            color: #6b7280;
             gap: 8px;
         }
 
@@ -624,16 +624,16 @@
         }
 
         .stat-card {
-            background: var(--glass-bg);
+            background: rgba(248, 250, 252, 0.95);
             backdrop-filter: blur(24px);
             -webkit-backdrop-filter: blur(24px);
-            border: 1px solid var(--glass-border);
+            border: 1px solid rgba(0, 0, 0, 0.08);
             border-radius: 20px;
             padding: 16px 24px;
             display: flex;
             align-items: center;
             gap: 20px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.07);
             transition: transform 0.3s ease;
         }
 
@@ -677,14 +677,14 @@
         .stat-number {
             font-size: 28px;
             font-weight: 800;
-            color: #ffffff;
+            color: #111827;
             line-height: 1;
         }
 
         .stat-label {
             font-size: 13px;
             font-weight: 600;
-            color: var(--ndu-text-muted);
+            color: #4b5563;
             margin-top: 4px;
         }
 
@@ -711,14 +711,14 @@
                     <img src="/logondu.png" alt="Naxçıvan Dövlət Universiteti Logosu" class="university-logo">
                 </div>
                 <div class="header-titles">
-                    <div class="university-name">Naxçıvan Dövlət Universiteti</div>
+                    <div class="university-name">Naxçıvan  Dövlət  Universiteti</div>
                     <div class="sub-header-title">
-                        Abituriyent Sənəd Qəbulu Mərkəzi
+                        Tələbə Dəstək Mərkəzi
                         <span class="live-badge">
                             <span class="live-dot"></span>
                             CANLI
                         </span>
-                        <button id="soundToggleBtn" onclick="testAndUnlockSound()" class="sound-badge">🔊 Səs Sınağı / Səsi Aç</button>
+                        <button id="soundToggleBtn" onclick="testAndUnlockSound()" class="sound-badge">🔊 Səs sınağı / Səsi aç</button>
                     </div>
                 </div>
             </div>
@@ -741,7 +741,7 @@
             <section class="desks-section">
                 <div class="section-header">
                     <div class="section-icon">🖥️</div>
-                    <div class="desks-title">Xidmət Masaları</div>
+                    <div class="desks-title">Xidmət masaları</div>
                 </div>
                 <div class="desks-grid">
                     <div class="desk" id="desk1">
@@ -800,7 +800,7 @@
             <section class="waiting-section">
                 <div class="section-header">
                     <div class="section-icon">⏳</div>
-                    <div class="waiting-title">Gözləyənlər Siyahısı</div>
+                    <div class="waiting-title">Gözləyənlər siyahısı</div>
                 </div>
                 <div class="waiting-list" id="waitingList">
                     <!-- Populated dynamically via JS -->
@@ -814,7 +814,7 @@
                 <div class="stat-icon-wrapper">👥</div>
                 <div class="stat-content">
                     <span class="stat-number" id="totalWaiting">0</span>
-                    <span class="stat-label">Gözləyən Vətəndaşlar</span>
+                    <span class="stat-label">Gözləyən vətəndaşlar</span>
                 </div>
             </div>
 
@@ -822,7 +822,7 @@
                 <div class="stat-icon-wrapper">⚡</div>
                 <div class="stat-content">
                     <span class="stat-number" id="totalServing">0</span>
-                    <span class="stat-label">Hazırda Xidmətdə</span>
+                    <span class="stat-label">Hazırda xidmətdə</span>
                 </div>
             </div>
 
@@ -830,7 +830,7 @@
                 <div class="stat-icon-wrapper">✅</div>
                 <div class="stat-content">
                     <span class="stat-number" id="totalServed">0</span>
-                    <span class="stat-label">Tamamlanan Xidmətlər</span>
+                    <span class="stat-label">Tamamlanan xidmətlər</span>
                 </div>
             </div>
         </footer>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Girişi</title>
+    <link rel="icon" type="image/png" href="/logondu.png">
+    <style>
+        body{font-family:Arial;background:linear-gradient(135deg,#667eea,#764ba2);display:flex;align-items:center;justify-content:center;height:100vh;margin:0}
+        .login{background:white;padding:50px;border-radius:20px;box-shadow:0 15px 40px rgba(0,0,0,.2);text-align:center}
+        .login h1{margin-bottom:20px;color:#667eea}
+        input{padding:12px;width:250px;border:1px solid #ccc;border-radius:8px;margin-bottom:15px}
+        button{padding:12px 30px;border:none;border-radius:8px;background:#667eea;color:white;font-size:16px;cursor:pointer}
+        .error{color:#d93025;margin-top:10px}
+    </style>
+</head>
+<body>
+    <div class="login">
+        <h1>Admin Girişi</h1>
+        <input id="pass" type="password" placeholder="Şifrə" autofocus>
+        <br><button onclick="login()">Daxil ol</button>
+        <div id="err" class="error"></div>
+    </div>
+    <script>
+        // Disable Right-Click Context Menu & F12 / Inspect Shortcuts
+        document.addEventListener('contextmenu', e => e.preventDefault());
+        document.addEventListener('keydown', e => {
+            if (
+                e.key === 'F12' ||
+                (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j' || e.key === 'C' || e.key === 'c')) ||
+                (e.ctrlKey && (e.key === 'U' || e.key === 'u' || e.key === 'S' || e.key === 's'))
+            ) {
+                e.preventDefault();
+                return false;
+            }
+            if (e.key === 'Enter') {
+                login();
+            }
+        });
+
+        async function login() {
+            const passInput = document.getElementById('pass');
+            const errDiv = document.getElementById('err');
+            const pwd = passInput.value ? passInput.value.trim() : '';
+
+            if (!pwd) {
+                errDiv.textContent = 'Şifrə daxil edin!';
+                return;
+            }
+
+            try {
+                const res = await fetch('/api/admin/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ pwd })
+                });
+                const data = await res.json();
+
+                if (res.ok && data.success) {
+                    sessionStorage.setItem('adminToken', data.token);
+                    location.href = '/admin-panel?token=' + data.token;
+                } else {
+                    errDiv.textContent = data.error || 'Yanlış şifrə!';
+                }
+            } catch (e) {
+                errDiv.textContent = 'Xəta baş verdi!';
+            }
+        }
+    </script>
+</body>
+</html>

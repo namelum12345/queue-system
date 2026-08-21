@@ -1,0 +1,35 @@
+{
+  "queue": [
+    {
+      "id": 1787295416533,
+      "number": 1,
+      "name": "Polad Əlizadə",
+      "serviceType": "Sənəd qəbulu",
+      "status": "waiting",
+      "addedTime": "2026-08-21T06:56:56.533Z",
+      "calledTime": null,
+      "completedTime": null
+    }
+  ],
+  "queueCounter": 2,
+  "desks": {
+    "1": null,
+    "2": null,
+    "3": null,
+    "4": null,
+    "5": null
+  },
+  "totalServed": 0,
+  "allOperations": [
+    {
+      "id": 1787295416533,
+      "number": 1,
+      "name": "Polad Əlizadə",
+      "serviceType": "Sənəd qəbulu",
+      "status": "waiting",
+      "addedTime": "2026-08-21T06:56:56.533Z",
+      "calledTime": null,
+      "completedTime": null
+    }
+  ]
+}
